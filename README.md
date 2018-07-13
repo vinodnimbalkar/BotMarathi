@@ -26,6 +26,6 @@ This BotMarathi created using help of article published at [https://www.digitalo
 
 ### 5. Run on terminal:
 
-    python retweet.py
+    python MarathiBot.py
 
 ### 6. And open Twitter in your web browser.
