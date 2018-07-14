@@ -5,7 +5,8 @@
 
 import tweepy
 from time import sleep
-from threading import Thread
+import time
+import schedule
 # Import in your Twitter application keys, tokens, and secrets.
 # Make sure your credentials.py file lives in the same directory as this .py file.
 from credentials import *
@@ -25,12 +26,6 @@ def retweet():
             print('Tweet by: @' + tweet.user.screen_name)
             print('Retweet published successfully.')
 
-            # Where sleep(60*30), sleep is measured in seconds.
-            # Change 60*30 to amount of seconds you want to have in-between retweets.
-        # Here 60*30 means 1800 second i.e 30 minute.
-            # Read Twitter's rules on automation. Don't spam!
-            sleep(60*30)
-
         # Some basic error handling. Will print out why retweet failed, into your terminal.
         except tweepy.TweepError as error:
             print('\nError. Retweet not successful. Reason: ')
@@ -48,12 +43,6 @@ def favorite():
             tweet.favorite()
             print('Tweet Favorited successfully.')
 
-            # Where sleep(60*30), sleep is measured in seconds.
-            # Change 60*30 to amount of seconds you want to have in-between favorites.
-            # Here 60*30 means 1800 second i.e 30 minute.
-            # Read Twitter's rules on automation. Don't spam!
-            sleep(60*30)
-
         # Some basic error handling. Will print out why favorite failed, into your terminal.
         except tweepy.TweepError as error:
             print('\nError. Favorite not successful. Reason: ')
@@ -69,8 +58,7 @@ def batami():
     try:
         api.update_status(message)
         print('News Posted successfully.')
-        #Sleep for two hour
-        sleep(60*120)
+
     except tweepy.TweepError as error:
             print('\nError. News posted failed. Reason: ')
             print(error.reason)
@@ -85,29 +73,15 @@ def aajVishesh():
     try:
         api.update_status(message)
         print('DinVishesh Posted successfully.')
-        #Sleep for one day
-        sleep(60*60*24)
+
     except tweepy.TweepError as error:
             print('\nError. DinVishesh posted failed. Reason: ')
             print(error.reason)
 
 if __name__ == "__main__":
-    retweet_thread = Thread(target=retweet)
-    #favorite_thread = Thread(target=favorite)
-    batami_thread = Thread(target=batami)
-    aajachaSuvichar_thread = Thread(target=aajachaSuvichar)
-    aajVishesh_thread = Thread(target=aajVishesh)
-
-    #Will execute each thread in parallel
-    retweet_thread.start()
-    #favorite_thread.start()
-    batami_thread.start()
-    aajachaSuvichar_thread.start()
-    aajVishesh_thread.start()
-
-    #This waits until the thread has completed
-    retweet_thread.join()
-    #favorite_thread.join()
-    batami_thread.join()
-    aajachaSuvichar_thread.join()
-    aajVishesh_thread.join()
+    schedule.every(30).minutes.do(retweet)
+    schedule.every(2).hours.do(batami)
+    schedule.every().day.do(aajVishesh)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
