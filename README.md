@@ -1,9 +1,13 @@
 # BotMarathi
+A Marathi twitter bot that retweets and favorites some other popular tweets based on hashtag :hash:, location, and user. It also tweets certain information every day, such as latest news :newspaper:, a quote and some events which took place on this day some years ago.
+
+The bot scraps the web to get the information, and utilizes BeautifulSoup to read the information properly. It using shcedule to run all these operations for periodically :clock1: at pre-determined intervals.
+
 ## What's this repository about?
 
 Online running at [https://twitter.com/botmarathi]
 
-This BotMarathi created using help of article published at [https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library] and deployed on heruko.
+This BotMarathi created using help of article published at [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library) and deployed on heruko.
 
 
 ## How do I run this project locally?
@@ -12,7 +16,7 @@ This BotMarathi created using help of article published at [https://www.digitalo
 
     git clone https://github.com/vinodnimbalkar/BotMarathi.git
     
-### 2. Change Directory:
+### 2. Change Directory:  :open_file_folder:
     cd BotMarathi
 
 ### 3. Install dependency:
@@ -20,12 +24,12 @@ This BotMarathi created using help of article published at [https://www.digitalo
     pip install -r requirements.txt
    
 ### 4. Instructions
-   * Create a new [Twitter Application.](https://apps.twitter.com/app/new) This is where you'll generate your keys, tokens, and     secrets.
+   * Create a new [Twitter Application.](https://apps.twitter.com/app/new) This is where you'll generate your keys :key:, tokens, and secrets.
    * Fill in your keys, tokens, and secrets in the creaditials.py file.
-   * Check comments in retweet.py to change the retweet bot to as per your convenience.
+   * Check comments in MarathiBot.py to change this bot to as per your convenience.
 
-### 5. Run on terminal:
+### 5. Run on terminal: :running:
 
     python MarathiBot.py
 
-### 6. And open Twitter in your web browser.
+### 6. And open Twitter in your web browser.:computer:
