@@ -1,1 +1,1 @@
-worker: python retweet.py
+worker: python MarathiBot.py
