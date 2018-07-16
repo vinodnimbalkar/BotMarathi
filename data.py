@@ -14,12 +14,21 @@ def marathiNews():
         data = i.text
         return data
 
+def tarikh():
+    #specify the url of marathi date website
+    url = "http://www.lokmat.com/"
+
+    page = urllib.request.urlopen(url)
+    soup = BeautifulSoup(page, 'html.parser')
+    tdate = soup.find('p', class_='today-date')
+    return tdate.text
+
 def suvichar():
     return ''
 
 def dinVishesh():
     d = date.today().strftime('%d-%B').lstrip("0").replace(" 0", " ").lower()
-    #specify the url of marathi news website
+    #specify the url of dinvishesh website
     url = "http://www.dinvishesh.com/{}-janm/".format(d) #जन्म तारखे नुसार 
     ghatana = "http://www.dinvishesh.com/{}-ghatana/".format(d) #घटने नुसार 
     mrutyu = "http://www.dinvishesh.com/{}-mrutyu/".format(d) #मृत्यू नुसार

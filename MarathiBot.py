@@ -20,7 +20,7 @@ def retweet():
     # Where q='#example', change #example to whatever hashtag or keyword you want to search.
     # Where items(5), change 5 to the amount of retweets you want to tweet.
     # Make sure you read Twitter's rules on automation - don't spam!
-    for tweet in tweepy.Cursor(api.search, q='#वारी').items(5):
+    for tweet in tweepy.Cursor(api.search, q='#वारी OR #पाऊस').items(5):
         try:
             tweet.retweet()
             print('Tweet by: @' + tweet.user.screen_name)
@@ -81,7 +81,7 @@ def aajVishesh():
 if __name__ == "__main__":
     schedule.every(30).minutes.do(retweet)
     schedule.every(2).hours.do(batami)
-    schedule.every().day.do(aajVishesh)
+    schedule.every().day.at("06:30").do(aajVishesh)
     while True:
         schedule.run_pending()
         time.sleep(1)
