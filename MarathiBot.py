@@ -26,6 +26,10 @@ def retweet():
             print('Tweet by: @' + tweet.user.screen_name)
             print('Retweet published successfully.')
 
+            if not tweet.user.following:
+                tweet.user.follow()
+                print('Followed the user' + tweet.user.screen_name)
+
         # Some basic error handling. Will print out why retweet failed, into your terminal.
         except tweepy.TweepError as error:
             print('\nError. Retweet not successful. Reason: ')
@@ -52,9 +56,9 @@ def favorite():
             break
             
 def batami():
-    quote = data.marathiNews()
+    news = data.marathiNews()
     message = "ताजी बातमी : "
-    message += quote
+    message += news
     try:
         api.update_status(message)
         print('News Posted successfully.')
@@ -64,7 +68,15 @@ def batami():
             print(error.reason)
     
 def aajachaSuvichar():
-    pass
+    quote = data.suvichar()
+    message = "सुविचार : "
+    message += quote
+    try:
+        api.update_status(message)
+        print('Quote posted successfully.')
+    except tweepy.TweepError as error:
+        print('\n Quote posted failed because : ')
+        print(error.reason)
 
 def aajVishesh():
     vishesh = data.dinVishesh()
@@ -81,6 +93,7 @@ def aajVishesh():
 if __name__ == "__main__":
     schedule.every(30).minutes.do(retweet)
     schedule.every(2).hours.do(batami)
+    schedule.every().day.at("07:30").do(aajachaSuvichar)
     schedule.every().day.at("06:30").do(aajVishesh)
     while True:
         schedule.run_pending()

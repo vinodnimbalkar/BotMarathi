@@ -1,6 +1,8 @@
 import urllib.request
 from bs4 import BeautifulSoup
 from datetime import date
+import pandas as pd
+import random
 
 def marathiNews():
     #specify the url of marathi news website
@@ -24,7 +26,10 @@ def tarikh():
     return tdate.text
 
 def suvichar():
-    return ''
+    num = random.randrange(1,365)
+    df = pd.read_csv("suvichar.csv", "r")
+    data = df.iloc[num,0]
+    return data
 
 def dinVishesh():
     d = date.today().strftime('%d-%B').lstrip("0").replace(" 0", " ").lower()
