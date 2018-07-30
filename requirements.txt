@@ -1,3 +1,5 @@
 tweepy==3.5.0
 beautifulsoup4==4.4.1
 schedule==0.5.0
+pandas==0.23.0
+requests==2.19.1

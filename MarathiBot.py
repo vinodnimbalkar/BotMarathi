@@ -20,7 +20,7 @@ def retweet():
     # Where q='#example', change #example to whatever hashtag or keyword you want to search.
     # Where items(5), change 5 to the amount of retweets you want to tweet.
     # Make sure you read Twitter's rules on automation - don't spam!
-    for tweet in tweepy.Cursor(api.search, q='#वारी OR #पाऊस').items(5):
+    for tweet in tweepy.Cursor(api.search, q='#मराठी OR #म OR #मराठा_आरक्षण').items(5):
         try:
             tweet.retweet()
             print('Tweet by: @' + tweet.user.screen_name)
@@ -78,6 +78,18 @@ def aajachaSuvichar():
         print('\n Quote posted failed because : ')
         print(error.reason)
 
+def shabdKhel():
+    graffiti = data.graffiti()
+    message = "ग्राफिटी (प्रत्येक ६ तासानंतर)\n"
+    message += graffiti
+    try:
+        api.update_status(message)
+        print('Graffiti Posted successfully.')
+
+    except tweepy.TweepError as error:
+            print('\nError. Graffiti posted failed. Reason: ')
+            print(error.reason)
+
 def aajVishesh():
     vishesh = data.dinVishesh()
     message = "दिनविशेष : "
@@ -90,10 +102,24 @@ def aajVishesh():
             print('\nError. DinVishesh posted failed. Reason: ')
             print(error.reason)
 
+def bitCoin():
+    coin = data.bitcoin()
+    message = "आज बिटकॉइन\n"
+    message += coin
+    try:
+        api.update_status(message)
+        print('Bitcoin Posted successfully.')
+
+    except tweepy.TweepError as error:
+            print('\nError. Bitcoin posted failed. Reason: ')
+            print(error.reason)
+
 if __name__ == "__main__":
     schedule.every(30).minutes.do(retweet)
     schedule.every(2).hours.do(batami)
+    schedule.every(6).hours.do(shabdKhel)
     schedule.every().day.at("07:30").do(aajachaSuvichar)
+    schedule.every().day.at("07:45").do(bitCoin)
     schedule.every().day.at("06:30").do(aajVishesh)
     while True:
         schedule.run_pending()
