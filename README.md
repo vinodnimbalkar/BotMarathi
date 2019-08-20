@@ -33,3 +33,9 @@ This BotMarathi created using help of article published at [here](https://www.di
     python MarathiBot.py
 
 ### 6. And open Twitter in your web browser.:computer:
+
+## Contributing
+
+Feel free to open an issue (or even better, send a Pull Request) for expanding this list. Contributions are very welcome!! 😄
+
+<a href="https://www.buymeacoffee.com/vinodnimbalkar" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
