@@ -40,20 +40,20 @@ def graffiti():
 def dinVishesh():
     d = date.today().strftime('%d-%B').lstrip("0").replace(" 0", " ").lower()
     #specify the url of dinvishesh website
-    url = "http://www.dinvishesh.com/{}-janm/".format(d) #जन्म तारखे नुसार 
-    ghatana = "http://www.dinvishesh.com/{}-ghatana/".format(d) #घटने नुसार 
-    mrutyu = "http://www.dinvishesh.com/{}-mrutyu/".format(d) #मृत्यू नुसार
+    url = f"http://www.dinvishesh.com/{d}-janm/" #जन्म तारखे नुसार 
+    ghatana = f"http://www.dinvishesh.com/{d}-ghatana/" #घटने नुसार 
+    mrutyu = f"http://www.dinvishesh.com/{d}-mrutyu/" #मृत्यू नुसार
    
     page = urllib.request.urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
     vishesh = soup.find('div', class_='td-post-content')
-    data = vishesh.text[:260]
+    data = vishesh.text
     return data
 
 def bazar():
     url = "http://marathi.webdunia.com/"
-    page = urllib.request.urlopen(url)
-    soup = BeautifulSoup(page, 'html.parser')
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
     business = soup.find('div', class_='business')
     for i in business.findAll('span'):
         data = i.text
