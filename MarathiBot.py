@@ -6,7 +6,7 @@
 import tweepy
 from time import sleep
 import time
-import schedule
+import schedule as sh
 # Import in your Twitter application keys, tokens, and secrets.
 # Make sure your credentials.py file lives in the same directory as this .py file.
 from credentials import *
@@ -20,15 +20,15 @@ def retweet():
     # Where q='#example', change #example to whatever hashtag or keyword you want to search.
     # Where items(5), change 5 to the amount of retweets you want to tweet.
     # Make sure you read Twitter's rules on automation - don't spam!
-    for tweet in tweepy.Cursor(api.search, q='#मराठी OR #म OR #मराठा_आरक्षण').items(5):
+    for tweet in tweepy.Cursor(api.search, q='#मराठी OR #माझाक्लिक OR #म').items(5):
         try:
             tweet.retweet()
             print('Tweet by: @' + tweet.user.screen_name)
             print('Retweet published successfully.')
 
-            if not tweet.user.following:
-                tweet.user.follow()
-                print('Followed the user' + tweet.user.screen_name)
+            # if not tweet.user.following:
+            #     tweet.user.follow()
+            #     print('Followed the user' + tweet.user.screen_name)
 
         # Some basic error handling. Will print out why retweet failed, into your terminal.
         except tweepy.TweepError as error:
@@ -57,7 +57,7 @@ def favorite():
             
 def batami():
     news = data.marathiNews()
-    message = "ताजी बातमी : "
+    message = "ताजी #बातमी : "
     message += news
     try:
         api.update_status(message)
@@ -69,7 +69,7 @@ def batami():
     
 def aajachaSuvichar():
     quote = data.suvichar()
-    message = "सुविचार : "
+    message = "#सुविचार : "
     message += quote
     try:
         api.update_status(message)
@@ -80,7 +80,7 @@ def aajachaSuvichar():
 
 def shabdKhel():
     graffiti = data.graffiti()
-    message = "ग्राफिटी (प्रत्येक ६ तासानंतर)\n"
+    message = "#ग्राफिटी :\n"
     message += graffiti
     try:
         api.update_status(message)
@@ -92,7 +92,7 @@ def shabdKhel():
 
 def aajVishesh():
     vishesh = data.dinVishesh()
-    message = "दिनविशेष : "
+    message = "#दिनविशेष : "
     message += vishesh
     try:
         api.update_status(message)
@@ -104,7 +104,7 @@ def aajVishesh():
 
 def bitCoin():
     coin = data.bitcoin()
-    message = "आज बिटकॉइन\n"
+    message = "आज #बिटकॉइन\n"
     message += coin
     try:
         api.update_status(message)
@@ -115,12 +115,12 @@ def bitCoin():
             print(error.reason)
 
 if __name__ == "__main__":
-    schedule.every(30).minutes.do(retweet)
-    schedule.every(2).hours.do(batami)
-    schedule.every(6).hours.do(shabdKhel)
-    schedule.every().day.at("07:30").do(aajachaSuvichar)
-    schedule.every().day.at("07:45").do(bitCoin)
-    schedule.every().day.at("06:30").do(aajVishesh)
+    sh.every(30).minutes.do(retweet)
+    sh.every(2).hours.do(batami)
+    sh.every(6).hours.do(shabdKhel)
+    sh.every().day.at("07:30").do(aajachaSuvichar)
+    # sh.every().day.at("07:45").do(bitCoin) #api site down
+    sh.every().day.at("06:30").do(aajVishesh)
     while True:
-        schedule.run_pending()
+        sh.run_pending()
         time.sleep(1)
