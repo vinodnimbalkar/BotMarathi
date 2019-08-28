@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import date
 import pandas as pd
 import random
+from credentials import *
 
 def marathiNews():
     #specify the url of marathi news website
@@ -66,3 +67,13 @@ def bitcoin():
     sell_data = "विक्री किंमत : "+ bitdata['sell']+"₹"
     data = buy_data+sell_data
     return data
+
+def euro_to_inr():
+    res = requests.get(f'http://data.fixer.io/api/latest?access_key={fixer_io_api_key}&symbols=USD,INR&format=1')
+    result = res.json()
+    timestamp = result['timestamp']
+    dt = result['date']
+    inr = result['rates']['INR']
+    usd = result['rates']['USD']
+    usd_to_inr = inr/usd
+    return usd_to_inr
