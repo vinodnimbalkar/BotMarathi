@@ -114,6 +114,17 @@ def bitCoin():
             print('\nError. Bitcoin posted failed. Reason: ')
             print(error.reason)
 
+def usdToInr():
+    inr_value = data.euro_to_inr()
+    message = f"आज डॉलरच्या तुलनेत रुपयाची किंमत {inr_value:.2f} आहे."
+    try:
+        api.update_status(message)
+        print('Rupees Value Posted successfully.')
+
+    except tweepy.TweepError as error:
+            print('\nError. Rupees Value posted failed. Reason: ')
+            print(error.reason)
+
 if __name__ == "__main__":
     sh.every(30).minutes.do(retweet)
     sh.every(2).hours.do(batami)
@@ -121,6 +132,7 @@ if __name__ == "__main__":
     sh.every().day.at("07:30").do(aajachaSuvichar)
     # sh.every().day.at("07:45").do(bitCoin) #api site down
     sh.every().day.at("06:30").do(aajVishesh)
+    sh.every().day.at("09:30").do(usdToInr)
     while True:
         sh.run_pending()
         time.sleep(1)
