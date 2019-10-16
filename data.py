@@ -1,4 +1,4 @@
-import urllib.request, requests
+import requests
 from bs4 import BeautifulSoup
 from datetime import date
 import pandas as pd
@@ -9,8 +9,8 @@ def marathiNews():
     #specify the url of marathi news website
     url = "http://www.lokmat.com/"
 
-    page = urllib.request.urlopen(url)
-    soup = BeautifulSoup(page, 'html.parser')
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
     news = soup.find('ul', class_='live-news-list')
 
     for i in news.findAll('li'):
@@ -21,8 +21,8 @@ def tarikh():
     #specify the url of marathi date website
     url = "http://www.lokmat.com/"
 
-    page = urllib.request.urlopen(url)
-    soup = BeautifulSoup(page, 'html.parser')
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
     tdate = soup.find('p', class_='today-date')
     return tdate.text
 
@@ -45,11 +45,12 @@ def dinVishesh():
     ghatana = f"http://www.dinvishesh.com/{d}-ghatana/" #घटने नुसार 
     mrutyu = f"http://www.dinvishesh.com/{d}-mrutyu/" #मृत्यू नुसार
    
-    page = urllib.request.urlopen(url)
-    soup = BeautifulSoup(page, 'html.parser')
-    vishesh = soup.find('div', class_='td-post-content')
-    data = vishesh.text
-    return data
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    vishesh_content = soup.find('div', class_='td-post-content')
+    vishesh = vishesh_content.find_all('p')
+    for data in vishesh:
+        yield data.text;
 
 def bazar():
     url = "http://marathi.webdunia.com/"

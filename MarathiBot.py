@@ -91,9 +91,9 @@ def shabdKhel():
             print(error.reason)
 
 def aajVishesh():
-    vishesh = data.dinVishesh()
     message = "#दिनविशेष : "
-    message += vishesh
+    for vishesh in data.dinVishesh():
+        message += vishesh
     try:
         api.update_status(message)
         print('DinVishesh Posted successfully.')
