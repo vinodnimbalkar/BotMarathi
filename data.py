@@ -78,3 +78,12 @@ def euro_to_inr():
     usd = result['rates']['USD']
     usd_to_inr = inr/usd
     return usd_to_inr
+
+def covid19():
+    res = requests.get('https://api.covid19india.org/data.json')
+    result = res.json()
+    data = result['statewise']
+    for stateinfo in data:
+        if stateinfo['state'] == 'Maharashtra':
+            return stateinfo
+        

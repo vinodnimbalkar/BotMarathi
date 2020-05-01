@@ -125,6 +125,20 @@ def usdToInr():
             print('\nError. Rupees Value posted failed. Reason: ')
             print(error.reason)
 
+def corona():
+    mahainfo = data.covid19()
+    message = f"""महाराष्ट्रात कोरोनाची लागण झालेल्यांची संख्या {mahainfo['confirmed']} वर पोहचली, असून त्यातील बरे झालेल्यांची संख्या {mahainfo['recovered']} इतकी आहे, तर मृत्यू झालेल्यांची संख्या {mahainfo['deaths']} आहे.
+शेवटचं अपडेट : {mahainfo['lastupdatedtime']}
+धन्यवाद - https://covid19india.org/
+#कोरोना #मराठी"""
+    try:
+        api.update_status(message)
+        print("Corona Info Posted successfully.")
+
+    except tweepy.TweepError as error:
+        print("\nError. Corona Info posted failed. Reason: ")
+        print(error.reason)
+
 if __name__ == "__main__":
     sh.every(30).minutes.do(retweet)
     sh.every(2).hours.do(batami)
@@ -133,6 +147,7 @@ if __name__ == "__main__":
     # sh.every().day.at("07:45").do(bitCoin) #api site down
     sh.every().day.at("06:30").do(aajVishesh)
     sh.every().day.at("09:30").do(usdToInr)
+    sh.every().day.at("10:00").do(corona)
     while True:
         sh.run_pending()
         time.sleep(1)
