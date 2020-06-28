@@ -9,7 +9,7 @@ import time
 import schedule as sh
 # Import in your Twitter application keys, tokens, and secrets.
 # Make sure your credentials.py file lives in the same directory as this .py file.
-from credentials import *
+from credentials import consumer_key, consumer_secret, access_token, access_token_secret
 import data
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -54,7 +54,7 @@ def favorite():
 
         except StopIteration:
             break
-            
+
 def batami():
     news = data.marathiNews()
     message = "ताजी #बातमी : "
@@ -66,7 +66,7 @@ def batami():
     except tweepy.TweepError as error:
             print('\nError. News posted failed. Reason: ')
             print(error.reason)
-    
+
 def aajachaSuvichar():
     quote = data.suvichar()
     message = "#सुविचार : "
@@ -102,18 +102,6 @@ def aajVishesh():
             print('\nError. DinVishesh posted failed. Reason: ')
             print(error.reason)
 
-def bitCoin():
-    coin = data.bitcoin()
-    message = "आज #बिटकॉइन\n"
-    message += coin
-    try:
-        api.update_status(message)
-        print('Bitcoin Posted successfully.')
-
-    except tweepy.TweepError as error:
-            print('\nError. Bitcoin posted failed. Reason: ')
-            print(error.reason)
-
 def usdToInr():
     inr_value = data.euro_to_inr()
     message = f"आज डॉलरच्या तुलनेत रुपयाची किंमत {inr_value:.2f} आहे."
@@ -144,7 +132,6 @@ if __name__ == "__main__":
     sh.every(2).hours.do(batami)
     sh.every(6).hours.do(shabdKhel)
     sh.every().day.at("07:30").do(aajachaSuvichar)
-    # sh.every().day.at("07:45").do(bitCoin) #api site down
     sh.every().day.at("06:30").do(aajVishesh)
     sh.every().day.at("09:30").do(usdToInr)
     sh.every().day.at("10:00").do(corona)
