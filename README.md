@@ -1,4 +1,7 @@
 # BotMarathi
+[![Twitter Follow](https://img.shields.io/twitter/follow/botmarathi?color=w&label=follow%20%40Botmarathi&style=for-the-badge)](http://twitter.com/botmarathi)
+[![HitCount](http://hits.dwyl.com/vinodnimbalkar/botmarathi.svg)](http://hits.dwyl.com/vinodnimbalkar/botmarathi)
+
 A Marathi twitter bot that retweets and favorites some other popular tweets based on hashtag :hash:, location, and user. It also tweets certain information every day, such as latest news :newspaper:, a quote and some events which took place on this day some years ago.
 
 The bot scraps the web to get the information, and utilizes BeautifulSoup to read the information properly. It using shcedule to run all these operations for periodically :clock1: at pre-determined intervals.
