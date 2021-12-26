@@ -1,6 +1,5 @@
 # BotMarathi
 [![Twitter Follow](https://img.shields.io/twitter/follow/botmarathi?color=w&label=follow%20%40Botmarathi&style=for-the-badge)](http://twitter.com/botmarathi)
-[![HitCount](http://hits.dwyl.com/vinodnimbalkar/botmarathi.svg)](http://hits.dwyl.com/vinodnimbalkar/botmarathi)
 
 A Marathi twitter bot that retweets and favorites some other popular tweets based on hashtag :hash:, location, and user. It also tweets certain information every day, such as latest news :newspaper:, a quote and some events which took place on this day some years ago.
 
@@ -18,14 +17,14 @@ This BotMarathi created using help of article published at [here](https://www.di
 ### 1. Clone the repository:
 
     git clone https://github.com/vinodnimbalkar/BotMarathi.git
-    
+
 ### 2. Change Directory:  :open_file_folder:
     cd BotMarathi
 
 ### 3. Install dependency:
 
     pip install -r requirements.txt
-   
+
 ### 4. Instructions
    * Create a new [Twitter Application.](https://apps.twitter.com/app/new) This is where you'll generate your keys :key:, tokens, and secrets.
    * Fill in your keys, tokens, and secrets in the creaditials.py file.
