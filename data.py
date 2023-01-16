@@ -39,7 +39,7 @@ def dinVishesh():
     #specify the url of dinvishesh website
     url = f"http://www.dinvishesh.com/{d}-janm/" #जन्म तारखे नुसार
     soup = get_source_code(url)
-    vishesh_content = soup.find('div', class_='td-post-content')
+    vishesh_content = soup.find('div', class_='col-md-8 mt-5')
     vishesh = vishesh_content.find_all('p')
     for data in vishesh:
         yield data.text
