@@ -3,17 +3,24 @@
 # Author: Vinod Nimbalkar
 # Date: Saturday, July 7th - 2018.
 
+import os
 import tweepy
 from time import sleep
 import time
 import schedule as sh
+from dotenv import load_dotenv
+
+load_dotenv()
 # Import in your Twitter application keys, tokens, and secrets.
-# Make sure your credentials.py file lives in the same directory as this .py file.
-from credentials import consumer_key, consumer_secret, access_token, access_token_secret
+# Make sure your .env file lives in the same directory as this .py file.
+CONSUMER_KEY=os.getenv('CONSUMER_KEY')
+CONSUMER_SECRET=os.getenv('CONSUMER_SECRET')
+ACCESS_TOKEN=os.getenv('ACCESS_TOKEN')
+ACCESS_TOKEN_SECRET=os.getenv('ACCESS_TOKEN_SECRET')
 import data
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 def retweet():

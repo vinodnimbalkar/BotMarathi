@@ -1,9 +1,13 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from datetime import date
 import pandas as pd
 import random
-from credentials import fixer_io_api_key
+from dotenv import load_dotenv
+
+load_dotenv()
+FIXER_IO_API_KEY = os.getenv('FIXER_IO_API_KEY ')
 
 def marathiNews():
     #specify the url of marathi news website
@@ -53,7 +57,7 @@ def bazar():
         return data
 
 def euro_to_inr():
-    res = requests.get(f'http://data.fixer.io/api/latest?access_key={fixer_io_api_key}&symbols=USD,INR&format=1')
+    res = requests.get(f'http://data.fixer.io/api/latest?access_key={FIXER_IO_API_KEY}&symbols=USD,INR&format=1')
     result = res.json()
     inr = result['rates']['INR']
     usd = result['rates']['USD']
