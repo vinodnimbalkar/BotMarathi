@@ -6,7 +6,6 @@
 import os
 import tweepy
 from time import sleep
-import time
 import schedule as sh
 from dotenv import load_dotenv
 
@@ -27,7 +26,7 @@ def retweet():
     # Where q='#example', change #example to whatever hashtag or keyword you want to search.
     # Where items(5), change 5 to the amount of retweets you want to tweet.
     # Make sure you read Twitter's rules on automation - don't spam!
-    for tweet in tweepy.Cursor(api.search, q='#मराठी OR #माझाक्लिक OR #म').items(5):
+    for tweet in tweepy.Cursor(api.search_tweets, q='#मराठी OR #माझाक्लिक OR #म').items(5):
         try:
             tweet.retweet()
             print('Tweet by: @' + tweet.user.screen_name)
@@ -38,9 +37,9 @@ def retweet():
             #     print('Followed the user' + tweet.user.screen_name)
 
         # Some basic error handling. Will print out why retweet failed, into your terminal.
-        except tweepy.TweepError as error:
+        except tweepy.TweepyException as error:
             print('\nError. Retweet not successful. Reason: ')
-            print(error.reason)
+            print(error)
 
         except StopIteration:
             break
@@ -49,15 +48,15 @@ def favorite():
     # Where q='#example', change #example to whatever hashtag or keyword you want to search.
     # Where items(5), change 5 to the amount of favorites you want to tweet.
     # Make sure you read Twitter's rules on automation - don't spam!
-    for tweet in tweepy.Cursor(api.search, q='#वारी').items(5):
+    for tweet in tweepy.Cursor(api.search_tweets, q='#वारी').items(5):
         try:
             tweet.favorite()
             print('Tweet Favorited successfully.')
 
         # Some basic error handling. Will print out why favorite failed, into your terminal.
-        except tweepy.TweepError as error:
+        except tweepy.TweepyException as error:
             print('\nError. Favorite not successful. Reason: ')
-            print(error.reason)
+            print(error)
 
         except StopIteration:
             break
@@ -70,9 +69,9 @@ def batami():
         api.update_status(message)
         print('News Posted successfully.')
 
-    except tweepy.TweepError as error:
+    except tweepy.TweepyException as error:
             print('\nError. News posted failed. Reason: ')
-            print(error.reason)
+            print(error)
 
 def aajachaSuvichar():
     quote = data.suvichar()
@@ -81,9 +80,9 @@ def aajachaSuvichar():
     try:
         api.update_status(message)
         print('Quote posted successfully.')
-    except tweepy.TweepError as error:
+    except tweepy.TweepyException as error:
         print('\n Quote posted failed because : ')
-        print(error.reason)
+        print(error)
 
 def shabdKhel():
     graffiti = data.graffiti()
@@ -93,9 +92,9 @@ def shabdKhel():
         api.update_status(message)
         print('Graffiti Posted successfully.')
 
-    except tweepy.TweepError as error:
+    except tweepy.TweepyException as error:
             print('\nError. Graffiti posted failed. Reason: ')
-            print(error.reason)
+            print(error)
 
 def aajVishesh():
     message = "#दिनविशेष : "
@@ -105,9 +104,9 @@ def aajVishesh():
         api.update_status(message)
         print('DinVishesh Posted successfully.')
 
-    except tweepy.TweepError as error:
+    except tweepy.TweepyException as error:
             print('\nError. DinVishesh posted failed. Reason: ')
-            print(error.reason)
+            print(error)
 
 def usdToInr():
     inr_value = data.euro_to_inr()
@@ -116,9 +115,9 @@ def usdToInr():
         api.update_status(message)
         print('Rupees Value Posted successfully.')
 
-    except tweepy.TweepError as error:
+    except tweepy.TweepyException as error:
             print('\nError. Rupees Value posted failed. Reason: ')
-            print(error.reason)
+            print(error)
 
 if __name__ == "__main__":
     sh.every(30).minutes.do(retweet)
@@ -129,4 +128,4 @@ if __name__ == "__main__":
     sh.every().day.at("09:30").do(usdToInr)
     while True:
         sh.run_pending()
-        time.sleep(1)
+        sleep(1)
